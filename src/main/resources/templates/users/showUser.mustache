@@ -1,0 +1,22 @@
+{{>layouts/header}}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Department</th>
+        <th scope="col">Habit</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#user}}
+        <tr>
+            <td>{{userName}}</td>
+            <th>{{userDepartment}}</th>
+            <td>{{userHabit}}</td>
+        </tr>
+    {{/user}}
+    </tbody>
+</table>
+
+{{>layouts/footer}}

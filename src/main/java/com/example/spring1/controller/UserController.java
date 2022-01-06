@@ -1,12 +1,15 @@
 package com.example.spring1.controller;
 
 import com.example.spring1.dto.UserForm;
+import com.example.spring1.entity.Article;
 import com.example.spring1.entity.User;
 import com.example.spring1.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -35,6 +38,19 @@ public class UserController {
         log.info(saved.toString());
 
         return "";
+    }
+
+    @GetMapping("/users/{id}")
+    public String showUser(@PathVariable Long id, Model model){
+        log.info("Article_id = "+id);
+        //1. id로 데이터 가져오기
+        User userEntity = userRepository.findById(id).orElse(null);
+
+        //2. 가져온 데이터를 모델에 등록하기
+        model.addAttribute("user", userEntity);
+
+        //3. 보여줄 페이지를 설정하기
+        return "users/showUser";
     }
 
 }
