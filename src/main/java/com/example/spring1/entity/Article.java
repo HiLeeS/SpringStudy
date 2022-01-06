@@ -1,6 +1,7 @@
 package com.example.spring1.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @AllArgsConstructor
+@NoArgsConstructor  //디폴트 생성자 추가
 @ToString
 @Entity // DB가 해당 객체를 인식 가능!
 public class Article {
