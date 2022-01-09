@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @Slf4j  //로깅을 위한 골벵이(어노테이션)
 public class ArticleController {
@@ -38,7 +40,7 @@ public class ArticleController {
         //System.out.println(saved.toString()); -> 로깅 기능으로 대체
         log.info(saved.toString());
 
-        return "";
+        return "redirect:/articles/"+saved.getId();
     }
     
     @GetMapping("/articles/{id}")
@@ -52,5 +54,29 @@ public class ArticleController {
 
         //3. 보여줄 페이지를 설정하기
         return "articles/show";
+    }
+
+    @GetMapping("/articles")
+    public String index(Model model) {
+        //1. 모든 Article 가져오기
+        List<Article> articleEntityList = articleRepository.findAll();
+
+        //2. 가져온 Article 묶음을 뷰로 전달하기
+        model.addAttribute("articleList",articleEntityList);
+
+        //3. 뷰 페이지를 설정하기
+        return "articles/index";    //articles/index.mustache
+    }
+
+    @GetMapping("/articles/{id}/edit")  //url에서 받아올 값의 변수명과 {id}
+    public String edit(@PathVariable Long id, Model model){ //매개변수로 받을 변수명은 같아야 함. @PathVariable일때
+        //수정할 데이터를 가져오기
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+
+        //모델에 데이터 등록하기
+        model.addAttribute("article", articleEntity);
+
+        // 뷰 페이지 설정하기
+        return "articles/edit";
     }
 }
