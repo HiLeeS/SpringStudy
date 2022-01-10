@@ -10,3 +10,4 @@ public interface ArticleRepository extends CrudRepository<Article, Long> {  // <
     @Override
     ArrayList<Article> findAll();
 }
+
