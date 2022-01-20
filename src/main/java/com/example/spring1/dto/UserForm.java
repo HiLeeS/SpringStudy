@@ -7,15 +7,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserForm {
-    private String userId;
-    private String userPassword;
-    private String userName;
-    private int userBirth;
-    private String userDepartment;
-    private String userHabit;
+    private String email;
+    private String password;
+    private String name;
+    private String birth;
+    private String major;
+    private String hobby;
 
     public User toEntity() {
-        return new User(null, userId, userPassword, userName, userBirth, userDepartment, userHabit);
+        return new User(null, email, password, name, birth, major, hobby);
     }
 
 }
