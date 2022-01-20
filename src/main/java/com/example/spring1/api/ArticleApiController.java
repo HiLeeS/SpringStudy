@@ -2,7 +2,6 @@ package com.example.spring1.api;
 
 import com.example.spring1.dto.ArticleForm;
 import com.example.spring1.entity.Article;
-import com.example.spring1.repository.ArticleRepository;
 import com.example.spring1.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
