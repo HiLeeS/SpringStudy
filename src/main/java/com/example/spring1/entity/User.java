@@ -39,4 +39,19 @@ public class User {
 
     @Column
     private String hobby;
+
+    public void patch(User user) {
+        if(user.email != null)
+            this.email = user.email;
+        if(user.password != null)
+            this.password = user.password;
+        if(user.name != null)
+            this.name = user.name;
+        if(user.birth != null)
+            this.birth = user.birth;
+        if(user.major != null)
+            this.major = user.major;
+        if(user.hobby != null)
+            this.hobby = user.hobby;
+    }
 }

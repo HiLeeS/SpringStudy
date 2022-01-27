@@ -1,5 +1,6 @@
 package com.example.spring1.api;
 
+import com.example.spring1.dto.ArticleForm;
 import com.example.spring1.dto.UserForm;
 import com.example.spring1.entity.Article;
 import com.example.spring1.entity.User;
@@ -46,4 +47,32 @@ public class UserApiController {
                 ResponseEntity.status(HttpStatus.OK).body(login):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    //PATCH
+    @PatchMapping("/api/users/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody UserForm dto){
+        User updated = userService.update(id,dto);
+        return (updated != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(updated):
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    //DELETE
+    @DeleteMapping("/api/users/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        User deleted = userService.delete(id);
+        return (deleted != null) ?
+                ResponseEntity.status(HttpStatus.OK).build() :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    //트랜잭션 -> 실패 -> 롤백
+    @PostMapping("/api/transaction-test")
+    public ResponseEntity<List<User>> transactionTest(@RequestBody List<UserForm> dtos){
+        List<User> createdList = userService.createArticles(dtos);
+        return (createdList != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(createdList) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
 }
